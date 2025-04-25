@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/opt/pwn.college/bash
 set -e
 
 # 1) Export DB creds if your app reads them
