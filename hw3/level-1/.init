@@ -1,4 +1,33 @@
-#!/opt/pwn.college/bash
+# !/opt/pwn.college/bash
+set -e
 
-# make sure the correct python is in the path
-mkdir -p /challenge/bin && ln -sf /bin/python /bin/python3 /bin/ipython /bin/ipython3 /challenge/bin
+# 1) shim python
+mkdir -p /challenge/bin \
+  && ln -sf /usr/bin/python3 /usr/bin/python /challenge/bin
+export PATH=/challenge/bin:$PATH
+
+# 2) install Python + MySQL deps
+apt-get update \
+  && apt-get install -y default-libmysqlclient-dev mysql-server \
+  && rm -rf /var/lib/apt/lists/*
+
+# 3) pip-install the app
+pip install -r /challenge/simple-webapp/requirements.txt
+
+# 4) start MySQL and prepare a database
+service mysql start
+mysql -e "CREATE DATABASE webapp; \
+          CREATE USER 'user'@'localhost' IDENTIFIED BY 'pass'; \
+          GRANT ALL ON webapp.* TO 'user'@'localhost'; FLUSH PRIVILEGES;"
+
+# 5) configure the app to use your credentials
+#    (edit simple-webapp/app.py or inject env vars as needed)
+#    For example, if the code reads os.getenv('DB_USER'), you can:
+export DB_USER=user
+export DB_PASSWORD=pass
+export DB_NAME=webapp
+export DB_HOST=localhost
+
+# 6) launch the Flask app
+cd /challenge/simple-webapp
+exec python app.py --host challenge.localhost --port 80
