@@ -1,0 +1,76 @@
+id: hw3-test
+
+name: WEB Test
+
+description: |
+  Third set of homework challenges.
+
+type: dojo
+
+award:
+  emoji: 🧪
+
+modules:
+
+  - id: hw3
+    name: Web exploitation
+    description: Challenges for the 3rd homework, focusing on common web vulnerabilities. For all of these levels, you should start the vulnerable web application by executing `/challenge/run`. You can read this file to get your bearings and help find the vulnerability.
+    challenges:
+
+      # - id: level-1-fancy
+      #   name: Level 1 Fancy
+      #   description: Testing fancy version of the vulnerable app.
+      - id: level-1
+        name: Level 1
+        description: Exploit a cross site scripting vulnerability.
+      - id: level-2
+        name: Level 2
+        description: Exploit a cross site scripting vulnerability with more complicated context.
+      - id: level-3
+        name: Level 3
+        description: Exploit a cross site scripting vulnerability with more complicated context and a naive XSS filter.
+      - id: level-4
+        name: Level 4
+        description: Exploit a cross site scripting vulnerability with more complicated context and a slightly more strict filter.
+      - id: level-5
+        name: Level 5
+        description: Exploit a cross site scripting vulnerability to cause a user action.
+      - id: level-6
+        name: Level 6
+        description: Exploit a cross site scripting vulnerability to exfilitrate user session data.
+      - id: level-7
+        name: Level 7
+        description: Exploit a cross site scripting vulnerability to exfilitrate user data without reading cookies.
+      - id: level-8
+        name: Level 8
+        description: Exploit a cross site scripting vulnerability and a session fixation vulnerability to steal user data without needing the user to be logged in first.
+      - id: level-9
+        name: Level 9
+        description: Exploit a cross site request forgery vulnerability.
+      - id: level-10
+        name: Level 10
+        description: Exploit a cross site request forgery vulnerability where the request must be a POST.
+      - id: level-11
+        name: Level 11
+        description: Exploit a command injection vulnerability.
+      - id: level-12
+        name: Level 12
+        description: Exploit a structured query language injection vulnerability to login.
+      - id: level-13
+        name: Level 13
+        description: Exploit a structured query language injection vulnerability to leak data.
+      - id: level-14
+        name: Level 14
+        description: Exploit a structured query language injection vulnerability with an unknown database structure.
+      - id: level-15
+        name: Level 15
+        description: Exploit a structured query language injection vulnerability to blindly leak data.
+      - id: level-16
+        name: Level 16
+        description: Exploit a path traversal vulnerability.
+      - id: level-17
+        name: Level 17
+        description: Exploit a path traversal vulnerability from a deeper path.
+      - id: level-18
+        name: Level 18
+        description: Exploit a template injection vulnerability.

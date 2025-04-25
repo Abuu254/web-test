@@ -1,0 +1,4 @@
+#!/opt/pwn.college/bash
+
+# make sure the correct python is in the path
+mkdir -p /challenge/bin && ln -sf /bin/python /bin/python3 /bin/ipython /bin/ipython3 /challenge/bin
