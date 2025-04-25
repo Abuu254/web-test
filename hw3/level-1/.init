@@ -1,4 +1,4 @@
-# !/opt/pwn.college/bash
+#!/opt/pwn.college/bash
 set -e
 
 # 1) shim python
