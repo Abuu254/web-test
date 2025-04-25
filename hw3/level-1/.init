@@ -1,22 +1,25 @@
 #!/opt/pwn.college/bash
 set -e
 
-# 1) Shim python in /challenge/bin so pip & python work
+# 1) Shim python so `python` & `pip` point to system Python3
 mkdir -p /challenge/bin \
   && ln -sf /usr/bin/python3 /usr/bin/python /challenge/bin
 export PATH=/challenge/bin:$PATH
 
-# 2) Install system deps (MySQL client + server)
+# 2) Install any OS libraries needed for mysqlclient (if your requirements include it)
 apt-get update \
   && apt-get install -y default-libmysqlclient-dev mysql-server \
   && rm -rf /var/lib/apt/lists/*
 
-# 3) Install Python deps
-pip install -r /challenge/simple-webapp/requirements.txt
+# 3) Pip-install the Flask app’s requirements
+cd /challenge/simple-webapp
+pip install -r requirements.txt
 
-# 4) Start MySQL and bootstrap the DB
+# 4) (Optional) Start MySQL and prepare a database if needed
 service mysql start
-mysql -e "CREATE DATABASE webapp;
-           CREATE USER 'user'@'localhost' IDENTIFIED BY 'pass';
+mysql -e "CREATE DATABASE IF NOT EXISTS webapp;
+           CREATE USER IF NOT EXISTS 'user'@'localhost' IDENTIFIED BY 'pass';
            GRANT ALL ON webapp.* TO 'user'@'localhost';
            FLUSH PRIVILEGES;"
+
+# DONE. Dependencies & DB are ready.  Hacker can now invoke /challenge/run
